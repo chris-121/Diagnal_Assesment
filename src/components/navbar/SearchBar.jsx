@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { SearchContext } from "../../pages/context";
+import { SearchContext } from "../../context/SearchContext";
 
 const textFieldStyles = {
   width: "100%",

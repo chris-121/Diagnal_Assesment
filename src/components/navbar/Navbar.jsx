@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Box, IconButton, Typography } from "@mui/material";
 import SearchBar from "./SearchBar";
-import { SearchContext } from "../../pages/context";
+import { SearchContext } from "../../context/SearchContext";
 
 const sxStyles = {
   root: {

@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import NavBar from "../components/navbar/Navbar";
 import React, { Suspense, useCallback, useState, lazy, useRef } from "react";
-import axios from "axios";
-import { SearchContext } from "./context";
+import { SearchContext } from "../context/SearchContext";
 import { getErrorMessage } from "../utils/getErrorMessage";
+import ApiService from "../services/api";
 
 const ImageGrid = lazy(() => import("../components/ImageGrid"));
 
@@ -45,8 +45,7 @@ function Homepage() {
     if (isSearching || isFetching || pageNumber > 3) return;
     setIsFetching(true);
 
-    axios
-      .get(`${import.meta.env.VITE_BASE_API_URL}/data/page${pageNumber}.json`)
+    ApiService.fetchShows(pageNumber)
       .then(({ data: { page } }) => {
         setTitle(page.title);
         const content = page["content-items"].content;

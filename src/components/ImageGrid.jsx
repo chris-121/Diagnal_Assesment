@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import GridItem from "./common/styled-components/GridItem";
+import GridItem from "./styled-components/GridItem";
 
 const sxStyles = {
   root: {
@@ -73,7 +73,7 @@ function ImageGrid({ shows, fetchShows, containerRef }) {
       <Grid marginTop={8} container rowSpacing={2}>
         {shows.map((show, index) => {
           const isLastRow = index >= shows.length - lastRowItems;
-          const xsValue = isLastRow && lastRowItems === 2 ? 4 : 4;
+          const xsValue = isLastRow && lastRowItems === 2 ? 6 : 4;
 
           return (
             <Grid item xs={xsValue} key={index}>
