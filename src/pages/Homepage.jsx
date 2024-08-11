@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import NavBar from "../components/Navbar/NavBar";
+import NavBar from "../components/navbar/Navbar";
 import React, { Suspense, useCallback, useState, lazy } from "react";
 import axios from "axios";
 import { SearchContext } from "./context";
@@ -16,10 +16,6 @@ const sxStyles = {
     backgroundColor: "#171717",
     overflowX: "hidden",
   },
-};
-
-const normalizePageContent = (shows = {}) => {
-  return shows["content-items"].content;
 };
 
 function Homepage() {
@@ -45,9 +41,9 @@ function Homepage() {
         .get(`https://test.create.diagnal.com/data/page${prevPageNumber}.json`)
         .then(({ data: { page } }) => {
           setTitle(page.title);
-          const normalizedData = normalizePageContent(page);
-          setShows((prev) => [...prev, ...normalizedData]);
-          setFilteredShows((prev) => [...prev, ...normalizedData]);
+          const content = shows["content-items"].content;
+          setShows((prev) => [...prev, ...content]);
+          setFilteredShows((prev) => [...prev, ...content]);
 
           return prevPageNumber + 1;
         })

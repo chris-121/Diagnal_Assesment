@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { Box, Grid, Paper, styled, Typography } from "@mui/material";
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
+import { Box, Grid, Typography } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { debounce } from "lodash";
+import GridItem from "./styled-components/GridItem";
 
 const sxStyles = {
   root: {
@@ -21,12 +21,6 @@ const sxStyles = {
     fontFamily: "'Titillium Web', sans-serif",
   },
 };
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "transparent",
-  padding: theme.spacing(1),
-  textAlign: "center",
-}));
 
 function ImageGrid({ shows, fetchShows }) {
   const containerRef = useRef(null);
@@ -66,7 +60,7 @@ function ImageGrid({ shows, fetchShows }) {
 
           return (
             <Grid item xs={xsValue} key={index}>
-              <Item elevation={0}>
+              <GridItem elevation={0}>
                 <LazyLoadImage
                   src={`https://test.create.diagnal.com/images/${show["poster-image"]}`}
                   width={"100px"}
@@ -82,7 +76,7 @@ function ImageGrid({ shows, fetchShows }) {
                   }}
                 />
                 <Typography sx={sxStyles.name}>{show.name}</Typography>
-              </Item>
+              </GridItem>
             </Grid>
           );
         })}
