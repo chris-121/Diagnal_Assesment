@@ -58,10 +58,6 @@ function Homepage() {
     });
   }, [isFetching]);
 
-  useEffect(() => {
-    fetchShows();
-  }, []);
-
   return (
     <Box sx={sxStyles.root}>
       <SearchContext.Provider value={{ onSearch: handleSearch }}>

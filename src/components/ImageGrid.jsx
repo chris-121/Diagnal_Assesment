@@ -30,37 +30,32 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function ImageGrid({ shows, fetchShows }) {
   const containerRef = useRef(null);
+  const sentinelRef = useRef(null);
 
   const lastRowItems = useMemo(() => {
     return shows.length % 3;
   }, [shows.length]);
 
-  const handleScroll = useCallback(() => {
-    if (
-      containerRef.current &&
-      (containerRef.current.scrollTop / containerRef.current.scrollHeight) *
-        100 >
-        5
-    ) {
-      fetchShows();
-    }
-  }, [fetchShows]);
-
-  const debouncedHandleScroll = useMemo(
-    () => debounce(handleScroll, 100),
-    [handleScroll]
-  );
-
   useEffect(() => {
-    const container = containerRef.current;
-    if (container) container.addEventListener("scroll", debouncedHandleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchShows();
+        }
+      },
+      { root: containerRef.current, rootMargin: "100px" }
+    );
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
 
     return () => {
-      if (container) {
-        container.removeEventListener("scroll", debouncedHandleScroll);
+      if (sentinelRef.current) {
+        observer.unobserve(sentinelRef.current);
       }
     };
-  }, []);
+  }, [fetchShows]);
 
   return (
     <Box sx={sxStyles.root} ref={containerRef}>
@@ -87,6 +82,7 @@ function ImageGrid({ shows, fetchShows }) {
             </Grid>
           );
         })}
+        <div ref={sentinelRef} style={{ height: "1px" }}></div>
       </Grid>
     </Box>
   );
