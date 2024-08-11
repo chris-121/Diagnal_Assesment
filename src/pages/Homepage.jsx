@@ -1,9 +1,10 @@
 import { Box } from "@mui/material";
 import NavBar from "../components/Navbar/NavBar";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useState, lazy } from "react";
 import axios from "axios";
-import ImageGrid from "../components/ImageGrid";
 import { SearchContext } from "./context";
+
+const ImageGrid = lazy(() => import("../components/ImageGrid"));
 
 const sxStyles = {
   root: {
@@ -63,7 +64,9 @@ function Homepage() {
       <SearchContext.Provider value={{ onSearch: handleSearch }}>
         <NavBar title={title} />
       </SearchContext.Provider>
-      <ImageGrid shows={filteredShows} fetchShows={fetchShows} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ImageGrid shows={filteredShows} fetchShows={fetchShows} />
+      </Suspense>
     </Box>
   );
 }
