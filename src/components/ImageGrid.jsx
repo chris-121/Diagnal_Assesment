@@ -20,7 +20,7 @@ const sxStyles = {
     position: "relative",
     zIndex: 1,
     width: "100%",
-    paddingTop: "150%",
+    aspectRatio: 182 / 272,
     overflow: "hidden",
   },
   image: {
