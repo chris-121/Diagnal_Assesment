@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Box, Grid, Paper, styled, Typography } from "@mui/material";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { debounce } from "lodash";
 

@@ -1,6 +1,6 @@
 // src/components/SearchBar.jsx
 import PropTypes from "prop-types";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { SearchContext } from "../../pages/context";

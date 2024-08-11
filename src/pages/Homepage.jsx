@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import NavBar from "../components/Navbar/NavBar";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import ImageGrid from "../components/ImageGrid";
 import { SearchContext } from "./context";
