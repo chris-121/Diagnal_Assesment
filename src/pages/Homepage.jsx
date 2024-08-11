@@ -46,7 +46,7 @@ function Homepage() {
     setIsFetching(true);
 
     axios
-      .get(`https://test.create.diagnal.com/data/page${pageNumber}.json`)
+      .get(`${import.meta.env.VITE_BASE_API_URL}/data/page${pageNumber}.json`)
       .then(({ data: { page } }) => {
         setTitle(page.title);
         const content = page["content-items"].content;

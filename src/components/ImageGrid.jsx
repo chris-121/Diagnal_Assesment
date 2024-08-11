@@ -73,22 +73,25 @@ function ImageGrid({ shows, fetchShows, containerRef }) {
       <Grid marginTop={8} container rowSpacing={2}>
         {shows.map((show, index) => {
           const isLastRow = index >= shows.length - lastRowItems;
-          const xsValue = isLastRow && lastRowItems === 2 ? 6 : 4;
+          const xsValue = isLastRow && lastRowItems === 2 ? 4 : 4;
 
           return (
             <Grid item xs={xsValue} key={index}>
               <GridItem elevation={0}>
                 <Box sx={sxStyles.imageWrapper}>
                   <LazyLoadImage
-                    src={`https://test.create.diagnal.com/images/${show["poster-image"]}`}
+                    src={`${import.meta.env.VITE_BASE_API_URL}/images/${
+                      show["poster-image"]
+                    }`}
                     alt={"Show-image"}
-                    placeholderSrc={
-                      "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png"
-                    }
+                    placeholderSrc={`${
+                      import.meta.env.VITE_BASE_API_URL
+                    }/images/placeholder_for_missing_posters.png`}
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src =
-                        "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png";
+                      e.target.src = `${
+                        import.meta.env.VITE_BASE_API_URL
+                      }/images/placeholder_for_missing_posters.png`;
                     }}
                     style={sxStyles.image}
                   />

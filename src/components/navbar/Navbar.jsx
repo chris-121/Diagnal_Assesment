@@ -6,18 +6,20 @@ import { SearchContext } from "../../pages/context";
 
 const sxStyles = {
   root: {
-    backgroundImage: "url(https://test.create.diagnal.com/images/nav_bar.png)",
+    backgroundImage: `url(${
+      import.meta.env.VITE_BASE_API_URL
+    }/images/nav_bar.png)`,
     position: "fixed",
     padding: "8px 16px",
     width: "100%",
-    marginTop: "-40px",
+    marginTop: "-48px",
     height: "150px",
     zIndex: 2,
   },
   rootContent: {
     width: "100%",
     display: "flex",
-    marginTop: "52px",
+    marginTop: "56px",
     alignItems: "center",
     justifyContent: "space-between",
   },

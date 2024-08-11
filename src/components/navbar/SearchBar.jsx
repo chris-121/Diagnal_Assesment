@@ -46,7 +46,7 @@ const SearchBar = () => {
                 <img
                   height={"20px"}
                   alt="Search icon"
-                  src={"https://test.create.diagnal.com/images/search.png"}
+                  src={`${import.meta.env.VITE_BASE_API_URL}/images/search.png`}
                 />
               </InputAdornment>
             ),
@@ -65,7 +65,7 @@ const SearchBar = () => {
             height={"20px"}
             width={"20px"}
             alt="Search button"
-            src={"https://test.create.diagnal.com/images/search.png"}
+            src={`${import.meta.env.VITE_BASE_API_URL}/images/search.png`}
           />
         </IconButton>
       )}
