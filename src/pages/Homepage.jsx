@@ -3,6 +3,7 @@ import NavBar from "../components/navbar/Navbar";
 import React, { Suspense, useCallback, useState, lazy } from "react";
 import axios from "axios";
 import { SearchContext } from "./context";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 const ImageGrid = lazy(() => import("../components/ImageGrid"));
 
@@ -34,31 +35,27 @@ function Homepage() {
   };
 
   const fetchShows = useCallback(() => {
-    setPageNumber((prevPageNumber) => {
-      if (isFetching || prevPageNumber > 3) return prevPageNumber;
-      setIsFetching(true);
-      axios
-        .get(`https://test.create.diagnal.com/data/page${prevPageNumber}.json`)
-        .then(({ data: { page } }) => {
-          setTitle(page.title);
-          const normalizedData = page["content-items"].content;
-          setShows((prev) => [...prev, ...normalizedData]);
-          setFilteredShows((prev) => [...prev, ...normalizedData]);
+    if (isFetching || pageNumber > 3) return;
+    setIsFetching(true);
 
-          return prevPageNumber + 1;
-        })
-        .catch((error) => console.log("Error", error))
-        .finally(() => setIsFetching(false));
+    axios
+      .get(`https://test.create.diagnal.com/data/page${pageNumber}.json`)
+      .then(({ data: { page } }) => {
+        setTitle(page.title);
+        const content = page["content-items"].content;
 
-      // This ensures that the pageNumber updates immediately
-      return prevPageNumber + 1;
-    });
-  }, [isFetching]);
+        setShows((prevShows) => [...prevShows, ...content]);
+        setFilteredShows((prevShows) => [...prevShows, ...content]);
+        setPageNumber((prevPageNumber) => prevPageNumber + 1);
+      })
+      .catch((error) => console.log(getErrorMessage(error)))
+      .finally(() => setIsFetching(false));
+  }, [isFetching, pageNumber]);
 
   return (
     <Box sx={sxStyles.root}>
       <SearchContext.Provider value={{ onSearch: handleSearch }}>
-        <NavBar title={title} />
+        <NavBar title={title.sadsad.asda} />
       </SearchContext.Provider>
       <Suspense fallback={<div>Loading...</div>}>
         <ImageGrid shows={filteredShows} fetchShows={fetchShows} />
