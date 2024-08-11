@@ -16,14 +16,31 @@ const sxStyles = {
     },
     backgroundColor: "#171717",
   },
+  imageWrapper: {
+    position: "relative",
+    zIndex: 1,
+    width: "100%",
+    paddingTop: "150%",
+    overflow: "hidden",
+  },
+  image: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+  },
   name: {
     color: "#ffff",
     fontFamily: "'Titillium Web', sans-serif",
+    textAlign: "left",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
 };
 
 function ImageGrid({ shows, fetchShows, containerRef }) {
-  // const containerRef = useRef(null);
   const triggerElement = useRef(null);
 
   const lastRowItems = useMemo(() => {
@@ -61,20 +78,21 @@ function ImageGrid({ shows, fetchShows, containerRef }) {
           return (
             <Grid item xs={xsValue} key={index}>
               <GridItem elevation={0}>
-                <LazyLoadImage
-                  src={`https://test.create.diagnal.com/images/${show["poster-image"]}`}
-                  width={"100px"}
-                  height={"150px"}
-                  alt={"Show-image"}
-                  placeholderSrc={
-                    "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png"
-                  }
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src =
-                      "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png";
-                  }}
-                />
+                <Box sx={sxStyles.imageWrapper}>
+                  <LazyLoadImage
+                    src={`https://test.create.diagnal.com/images/${show["poster-image"]}`}
+                    alt={"Show-image"}
+                    placeholderSrc={
+                      "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png"
+                    }
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png";
+                    }}
+                    style={sxStyles.image}
+                  />
+                </Box>
                 <Typography sx={sxStyles.name}>{show.name}</Typography>
               </GridItem>
             </Grid>
@@ -95,7 +113,7 @@ ImageGrid.propTypes = {
       "poster-image": PropTypes.string.isRequired,
     })
   ).isRequired,
-  containerRef: PropTypes.any,
+  containerRef: PropTypes.object,
 };
 
 export default ImageGrid;

@@ -12,6 +12,7 @@ const sxStyles = {
     width: "100%",
     marginTop: "-40px",
     height: "150px",
+    zIndex: 2,
   },
   rootContent: {
     width: "100%",
@@ -45,7 +46,12 @@ function NavBar({ title = "", scrollToTop = () => {} }) {
                 src={"https://test.create.diagnal.com/images/Back.png"}
               />
             </IconButton>
-            <Typography sx={{ fontFamily: "'Titillium Web', sans-serif" }}>
+            <Typography
+              sx={{
+                fontFamily: "'Titillium Web', sans-serif",
+                fontSize: "20px",
+              }}
+            >
               {title}
             </Typography>
           </Box>
