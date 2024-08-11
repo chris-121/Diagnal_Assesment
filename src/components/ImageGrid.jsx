@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import GridItem from "./styled-components/GridItem";
+import GridItem from "./common/styled-components/GridItem";
 
 const sxStyles = {
   root: {
