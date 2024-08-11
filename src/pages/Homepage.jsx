@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import ImageGrid from "../components/ImageGrid";
 import { SearchContext } from "./context";
+
 const sxStyles = {
   root: {
     display: "flex",
