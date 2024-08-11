@@ -24,7 +24,7 @@ const sxStyles = {
 
 function ImageGrid({ shows, fetchShows }) {
   const containerRef = useRef(null);
-  const sentinelRef = useRef(null);
+  const triggerElement = useRef(null);
 
   const lastRowItems = useMemo(() => {
     return shows.length % 3;
@@ -40,13 +40,13 @@ function ImageGrid({ shows, fetchShows }) {
       { root: containerRef.current, rootMargin: "100px" }
     );
 
-    if (sentinelRef.current) {
-      observer.observe(sentinelRef.current);
+    if (triggerElement.current) {
+      observer.observe(triggerElement.current);
     }
 
     return () => {
-      if (sentinelRef.current) {
-        observer.unobserve(sentinelRef.current);
+      if (triggerElement.current) {
+        observer.unobserve(triggerElement.current);
       }
     };
   }, [fetchShows]);
@@ -80,19 +80,21 @@ function ImageGrid({ shows, fetchShows }) {
             </Grid>
           );
         })}
-        <div ref={sentinelRef} style={{ height: "1px" }}></div>
+        <div ref={triggerElement} style={{ height: "1px" }}></div>
       </Grid>
     </Box>
   );
 }
 
 ImageGrid.propTypes = {
-  fetchShows: PropTypes.func,
+  fetchShows: PropTypes.func.isRequired,
   shows: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string,
+      id: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      "poster-image": PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
 };
 
 export default ImageGrid;
