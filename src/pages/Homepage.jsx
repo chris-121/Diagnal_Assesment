@@ -41,9 +41,9 @@ function Homepage() {
         .get(`https://test.create.diagnal.com/data/page${prevPageNumber}.json`)
         .then(({ data: { page } }) => {
           setTitle(page.title);
-          const content = shows["content-items"].content;
-          setShows((prev) => [...prev, ...content]);
-          setFilteredShows((prev) => [...prev, ...content]);
+          const normalizedData = page["content-items"].content;
+          setShows((prev) => [...prev, ...normalizedData]);
+          setFilteredShows((prev) => [...prev, ...normalizedData]);
 
           return prevPageNumber + 1;
         })
