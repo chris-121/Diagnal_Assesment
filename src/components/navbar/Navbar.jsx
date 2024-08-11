@@ -62,8 +62,7 @@ function NavBar({ title = "" }) {
 }
 
 NavBar.propTypes = {
-  title: PropTypes.string,
-  onSearch: PropTypes.func,
+  title: PropTypes.string.isRequired,
 };
 
 export default NavBar;

@@ -48,6 +48,7 @@ const SearchBar = ({ isSearchBarOpen, onClickSearch }) => {
               <InputAdornment position="start">
                 <img
                   height={"20px"}
+                  alt="Search icon"
                   src={"https://test.create.diagnal.com/images/search.png"}
                 />
               </InputAdornment>
@@ -66,6 +67,7 @@ const SearchBar = ({ isSearchBarOpen, onClickSearch }) => {
           <img
             height={"20px"}
             width={"20px"}
+            alt="Search button"
             src={"https://test.create.diagnal.com/images/search.png"}
           />
         </IconButton>

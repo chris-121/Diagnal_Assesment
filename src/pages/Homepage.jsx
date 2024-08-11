@@ -55,7 +55,7 @@ function Homepage() {
   return (
     <Box sx={sxStyles.root}>
       <SearchContext.Provider value={{ onSearch: handleSearch }}>
-        <NavBar title={title.sadsad.asda} />
+        <NavBar title={title} />
       </SearchContext.Provider>
       <Suspense fallback={<div>Loading...</div>}>
         <ImageGrid shows={filteredShows} fetchShows={fetchShows} />
