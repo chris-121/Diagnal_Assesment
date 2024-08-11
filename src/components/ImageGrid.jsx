@@ -22,8 +22,8 @@ const sxStyles = {
   },
 };
 
-function ImageGrid({ shows, fetchShows }) {
-  const containerRef = useRef(null);
+function ImageGrid({ shows, fetchShows, containerRef }) {
+  // const containerRef = useRef(null);
   const triggerElement = useRef(null);
 
   const lastRowItems = useMemo(() => {
@@ -49,7 +49,7 @@ function ImageGrid({ shows, fetchShows }) {
         observer.unobserve(triggerElement.current);
       }
     };
-  }, [fetchShows]);
+  }, [fetchShows, containerRef]);
 
   return (
     <Box sx={sxStyles.root} ref={containerRef}>
@@ -95,6 +95,7 @@ ImageGrid.propTypes = {
       "poster-image": PropTypes.string.isRequired,
     })
   ).isRequired,
+  containerRef: PropTypes.any,
 };
 
 export default ImageGrid;

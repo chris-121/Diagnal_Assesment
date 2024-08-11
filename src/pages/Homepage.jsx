@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import NavBar from "../components/navbar/Navbar";
-import React, { Suspense, useCallback, useState, lazy } from "react";
+import React, { Suspense, useCallback, useState, lazy, useRef } from "react";
 import axios from "axios";
 import { SearchContext } from "./context";
 import { getErrorMessage } from "../utils/getErrorMessage";
@@ -26,6 +26,8 @@ function Homepage() {
   const [pageNumber, setPageNumber] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+
+  const imageGridContainerRef = useRef(null);
 
   const handleSearch = (query) => {
     setFilteredShows(
@@ -57,6 +59,10 @@ function Homepage() {
       .finally(() => setIsFetching(false));
   }, [isFetching, pageNumber, isSearching]);
 
+  const scrollToTop = useCallback(() => {
+    imageGridContainerRef.current.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <Box sx={sxStyles.root}>
       <SearchContext.Provider
@@ -66,10 +72,14 @@ function Homepage() {
           onClickSearch: handleClickOnSearch,
         }}
       >
-        <NavBar title={title} />
+        <NavBar title={title} scrollToTop={scrollToTop} />
       </SearchContext.Provider>
       <Suspense fallback={<div>Loading...</div>}>
-        <ImageGrid shows={filteredShows} fetchShows={fetchShows} />
+        <ImageGrid
+          shows={filteredShows}
+          fetchShows={fetchShows}
+          containerRef={imageGridContainerRef}
+        />
       </Suspense>
     </Box>
   );

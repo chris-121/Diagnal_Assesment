@@ -29,7 +29,7 @@ const sxStyles = {
   },
 };
 
-function NavBar({ title = "" }) {
+function NavBar({ title = "", scrollToTop = () => {} }) {
   const { isSearching } = useContext(SearchContext);
 
   return (
@@ -37,7 +37,7 @@ function NavBar({ title = "" }) {
       <Box sx={sxStyles.rootContent}>
         {!isSearching && (
           <Box sx={sxStyles.title}>
-            <IconButton>
+            <IconButton onClick={scrollToTop}>
               <img
                 height={"20px"}
                 width={"20px"}
@@ -57,6 +57,7 @@ function NavBar({ title = "" }) {
 }
 
 NavBar.propTypes = {
+  scrollToTop: PropTypes.func,
   title: PropTypes.string.isRequired,
 };
 
