@@ -44,6 +44,7 @@ function NavBar({ title = "" }) {
               <img
                 height={"20px"}
                 width={"20px"}
+                alt={"Back-Icon"}
                 src={"https://test.create.diagnal.com/images/Back.png"}
               />
             </IconButton>

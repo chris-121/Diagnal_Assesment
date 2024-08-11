@@ -65,7 +65,7 @@ function ImageGrid({ shows, fetchShows }) {
                   src={`https://test.create.diagnal.com/images/${show["poster-image"]}`}
                   width={"100px"}
                   height={"150px"}
-                  alt="Image Alt"
+                  alt={"Show-image"}
                   placeholderSrc={
                     "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png"
                   }
