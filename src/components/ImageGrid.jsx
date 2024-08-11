@@ -75,7 +75,6 @@ function ImageGrid({ shows, fetchShows }) {
                   width={"100px"}
                   height={"150px"}
                   alt="Image Alt"
-                  Placeholder={`https://test.create.diagnal.com/images/posterthatismissing.jpg`}
                 />
                 <Typography sx={sxStyles.name}>{show.name}</Typography>
               </Item>
