@@ -25,6 +25,7 @@ function Homepage() {
   const [filteredShows, setFilteredShows] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
   const handleSearch = (query) => {
     setFilteredShows(
@@ -34,8 +35,12 @@ function Homepage() {
     );
   };
 
+  const handleClickOnSearch = () => {
+    setIsSearching((prev) => !prev);
+  };
+
   const fetchShows = useCallback(() => {
-    if (isFetching || pageNumber > 3) return;
+    if (isSearching || isFetching || pageNumber > 3) return;
     setIsFetching(true);
 
     axios
@@ -50,11 +55,17 @@ function Homepage() {
       })
       .catch((error) => console.log(getErrorMessage(error)))
       .finally(() => setIsFetching(false));
-  }, [isFetching, pageNumber]);
+  }, [isFetching, pageNumber, isSearching]);
 
   return (
     <Box sx={sxStyles.root}>
-      <SearchContext.Provider value={{ onSearch: handleSearch }}>
+      <SearchContext.Provider
+        value={{
+          isSearching,
+          onSearch: handleSearch,
+          onClickSearch: handleClickOnSearch,
+        }}
+      >
         <NavBar title={title} />
       </SearchContext.Provider>
       <Suspense fallback={<div>Loading...</div>}>

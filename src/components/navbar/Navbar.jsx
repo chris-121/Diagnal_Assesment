@@ -1,7 +1,8 @@
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import SearchBar from "./SearchBar";
+import { SearchContext } from "../../pages/context";
 
 const sxStyles = {
   root: {
@@ -29,16 +30,12 @@ const sxStyles = {
 };
 
 function NavBar({ title = "" }) {
-  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
-
-  const handleClickOnSearch = () => {
-    setIsSearchBarOpen((prev) => !prev);
-  };
+  const { isSearching } = useContext(SearchContext);
 
   return (
     <Box sx={sxStyles.root}>
       <Box sx={sxStyles.rootContent}>
-        {!isSearchBarOpen && (
+        {!isSearching && (
           <Box sx={sxStyles.title}>
             <IconButton>
               <img
@@ -53,10 +50,7 @@ function NavBar({ title = "" }) {
             </Typography>
           </Box>
         )}
-        <SearchBar
-          isSearchBarOpen={isSearchBarOpen}
-          onClickSearch={handleClickOnSearch}
-        />
+        <SearchBar />
       </Box>
     </Box>
   );

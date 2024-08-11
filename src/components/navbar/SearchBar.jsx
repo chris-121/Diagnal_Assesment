@@ -1,5 +1,3 @@
-// src/components/SearchBar.jsx
-import PropTypes from "prop-types";
 import React, { useContext, useState } from "react";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -17,10 +15,9 @@ const textFieldStyles = {
   },
 };
 
-const SearchBar = ({ isSearchBarOpen, onClickSearch }) => {
+const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
-
-  const { onSearch } = useContext(SearchContext);
+  const { onSearch, onClickSearch, isSearching } = useContext(SearchContext);
 
   const onChange = (e) => {
     setSearchTerm(e.target.value);
@@ -35,7 +32,7 @@ const SearchBar = ({ isSearchBarOpen, onClickSearch }) => {
 
   return (
     <>
-      {isSearchBarOpen ? (
+      {isSearching ? (
         <TextField
           autoFocus
           variant={"standard"}
@@ -74,11 +71,6 @@ const SearchBar = ({ isSearchBarOpen, onClickSearch }) => {
       )}
     </>
   );
-};
-
-SearchBar.propTypes = {
-  isSearchBarOpen: PropTypes.bool,
-  onClickSearch: PropTypes.func,
 };
 
 export default SearchBar;
