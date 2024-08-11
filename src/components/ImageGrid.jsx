@@ -63,18 +63,23 @@ function ImageGrid({ shows, fetchShows }) {
         {shows.map((show, index) => {
           const isLastRow = index >= shows.length - lastRowItems;
           const xsValue = isLastRow && lastRowItems === 2 ? 6 : 4;
-          const imgName =
-            show["poster-image"] !== "posterthatismissing.jpg"
-              ? show["poster-image"]
-              : "placeholder_for_missing_posters.png";
+
           return (
             <Grid item xs={xsValue} key={index}>
               <Item elevation={0}>
                 <LazyLoadImage
-                  src={`https://test.create.diagnal.com/images/${imgName}`}
+                  src={`https://test.create.diagnal.com/images/${show["poster-image"]}`}
                   width={"100px"}
                   height={"150px"}
                   alt="Image Alt"
+                  placeholderSrc={
+                    "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png"
+                  }
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src =
+                      "https://test.create.diagnal.com/images/placeholder_for_missing_posters.png";
+                  }}
                 />
                 <Typography sx={sxStyles.name}>{show.name}</Typography>
               </Item>
